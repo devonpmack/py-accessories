@@ -5,6 +5,6 @@ All my python accessory classes
 
 ```console
 git clone https://github.com/devonpmack/py-accessories.git
-cd /py-accessories/dist
+cd dist
 pip install py-accessories-*.tar
 ```
