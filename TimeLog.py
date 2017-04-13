@@ -10,3 +10,6 @@ class Timer(object):
 
     def reset(self):
         self.start_time = dt.date.now()
+
+    def time_print(self, to_print):
+        print(self.time_str() + to_print)
