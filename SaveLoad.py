@@ -5,10 +5,13 @@ import json
 
 
 class SaveLoad(object):
-    def __init__(self, to_load=str()):
-        if len(to_load) > 0:
-            with open(to_load) as f:
-                self.__dict__ = json.load(f)
+    def __init__(self, file_name=str()):
+        try:
+            if len(file_name) > 0:
+                with open(file_name) as f:
+                    self.__dict__ = json.load(f)
+        except FileNotFoundError:
+            print("[SaveLoad Error] Can't find file " + file_name + "!")
 
     def dump(self, file_name):
         f = open(file_name, "w")
@@ -19,5 +22,4 @@ class SaveLoad(object):
             f = open(file_name, "r")
             self.__dict__ = json.load(f)
         except FileNotFoundError:
-            print("File " + file_name + " not found!")
-
+            print("[SaveLoad Error] Can't find file " + file_name + "!")
