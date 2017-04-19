@@ -4,12 +4,12 @@ All my python accessory classes
 ## Installation
 
 ```console
-git clone https://github.com/devonpmack/py-accessories.git
+git clone https://github.com/devonpmack/pyaccessories.git
 cd dist
 pip install py-accessories-*.tar
 ```
 
 ### Submodule
 ```console
-git submodule add https://github.com/devonpmack/py-accessories.git
+git submodule add https://github.com/devonpmack/pyaccessories.git
 ```
