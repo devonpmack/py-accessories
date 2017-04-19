@@ -1,4 +1,4 @@
-# py-accessories
+# pyaccessories
 All my python accessory classes
 
 ## Installation
