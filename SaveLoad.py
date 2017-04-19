@@ -17,7 +17,13 @@ class SaveLoad(object):
     def load(self, file_name, create=False):
         try:
             f = open(file_name, "r")
-            self.__dict__ = json.load(f)
+            try:
+                self.__dict__ = json.load(f)
+            except json.decoder.JSONDecodeError as e:
+                if "Expecting value: " in repr(e) and "line 1 column 1 (char 0)" in repr(e):
+                    pass
+                else:
+                    raise
             f.close()
         except FileNotFoundError:
             if create:
@@ -25,4 +31,4 @@ class SaveLoad(object):
                 f = open(file_name, "w")
                 f.close()
             else:
-                raise FileNotFoundError
+                raise
