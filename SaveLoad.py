@@ -20,15 +20,20 @@ class SaveLoad(object):
             try:
                 self.__dict__ = json.load(f)
             except json.decoder.JSONDecodeError as e:
+                # If it's an empty file
                 if "Expecting value: " in repr(e) and "line 1 column 1 (char 0)" in repr(e):
                     pass
                 else:
                     raise
             f.close()
+            # Successfully loaded file
+            return True
         except FileNotFoundError:
             if create:
                 print("[SaveLoad] Creating file " + file_name)
                 f = open(file_name, "w")
                 f.close()
+                # File doesn't exist
+                return False
             else:
                 raise
