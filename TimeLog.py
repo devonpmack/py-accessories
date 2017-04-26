@@ -11,7 +11,7 @@ class Timer(object):
             return "[Elapsed time: %.2f] " % (dt.datetime.now() - self.start_time).total_seconds()
         else:
             return self.colour + "[Elapsed time: %.2f] " % (dt.datetime.now() - self.start_time).total_seconds() + \
-                   self.colour
+                   "\033[0m"
 
     def reset(self):
         self.start_time = dt.datetime.now()
@@ -19,8 +19,10 @@ class Timer(object):
     def time_print(self, to_print):
         print(self.time_str() + to_print)
 
-    def set_colour(self, colour):
+    def set_colour(self, colour=None):
         if 30 <= colour <= 37:
-            self.colour = "\\033[1;" + str(colour) + ";40m"
+            self.colour = "\033[1;" + str(colour) + ";0m"
+        elif colour is None:
+            self.colour = None
         else:
             print("[Warning] Invalid colour!")
