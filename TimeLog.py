@@ -27,7 +27,7 @@ class Timer(object):
         if type(self.colour) is not str or not do_colour:
             return "[Elapsed time: %.2f] " % (dt.datetime.now() - self.start_time).total_seconds()
         else:
-            return self.colour + "[Elapsed time: %.2fs] " % (dt.datetime.now() - self.start_time).total_seconds() + \
+            return self.colour + "[Elapsed time: %.2f] " % (dt.datetime.now() - self.start_time).total_seconds() + \
                    "\033[0m"
 
     def reset(self):
