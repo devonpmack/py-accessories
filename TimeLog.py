@@ -1,5 +1,6 @@
 import datetime as dt
 
+
 class Timer(object):
     def __init__(self, log_file=None):
         self.start_time = dt.datetime.now()
@@ -35,7 +36,7 @@ class Timer(object):
         if self.logging:
             import logging
             self.logger.info(self.time_str(do_colour=False) + str(to_print))
-        print(self.time_str() + to_print)
+        print(self.time_str() + str(to_print))
 
     def set_colour(self, colour=None):
         if 30 <= colour <= 37:
