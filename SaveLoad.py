@@ -1,6 +1,5 @@
 # Written by Devon Mack April 2017
 # This class can be used to easily store variables to a file and load them back later
-# TODO make a get function that checks if the variable in in the file and if its not,
 # then it asks the user to input it and updates the file
 import json
 
