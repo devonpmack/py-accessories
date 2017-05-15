@@ -64,10 +64,14 @@ class SaveLoad(object):
             self.dump()
             print("Updated %s" % u_file_name)
         else:
+            u_file_name = self.__get_saved_filename(file_name)
             if default is not None:
                 self.__dict__[variable] = default
             else:
-                raise ValueError("Missing variable %s in %s!" % (variable, self.__get_saved_filename(file_name)))
+                raise ValueError("Missing variable %s in %s!" % (variable, u_file_name))
+
+            self.dump()
+            print("Updated %s" % u_file_name)
 
         return self.__dict__[variable]
 
