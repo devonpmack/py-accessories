@@ -1,22 +1,30 @@
 # Written by Devon Mack April 2017
 # This class can be used to easily store variables to a file and load them back later
-
+# TODO make a get function that checks if the variable in in the file and if its not,
+# then it asks the user to input it and updates the file
 import json
 
 
 class SaveLoad(object):
-    def __init__(self, file_name="", create=False):
-        if file_name != "":
+    def __init__(self, file_name=None, create=False):
+        if file_name is not None:
             self.load(file_name, create)
 
-    def dump(self, file_name):
-        f = open(file_name, "w")
+        # Save the file name for later use
+        self.file_name_saved = file_name
+
+    def dump(self, file_name=None):
+        """Dumps this object into file as JSON."""
+        # Dump the json
+        f = open(self.__get_saved_filename(file_name), "w")
         json.dump(self.__dict__, f, sort_keys=True, indent=4, separators=(',', ': '))
         f.close()
 
-    def load(self, file_name, create=False):
+    def load(self, file_name=None, create=False):
+        """Loads JSON from file into this object."""
+        u_file_name = self.__get_saved_filename(file_name)
         try:
-            f = open(file_name, "r")
+            f = open(u_file_name, "r")
             try:
                 self.__dict__ = json.load(f)
             except json.decoder.JSONDecodeError as e:
@@ -30,10 +38,34 @@ class SaveLoad(object):
             return True
         except FileNotFoundError:
             if create:
-                print("[SaveLoad] Creating file " + file_name)
-                f = open(file_name, "w")
+                print("[SaveLoad] Creating file " + u_file_name)
+                f = open(u_file_name, "w")
                 f.close()
                 # File doesn't exist
                 return False
             else:
                 raise
+
+    def get(self, variable, file_name=None):
+        """Returns the value of the variable specified. If the variable doesn't exist then it will ask the user to input
+        this variable. It will then dump the variable to file_name, or the last file_name used."""
+        if variable in self.__dict__:
+            return self.__dict__[variable]
+        else:
+            u_file_name = self.__get_saved_filename(file_name)
+            self.__dict__[variable] = input("%s not in %s, please enter it here:\n" % (variable, u_file_name))
+            self.dump()
+            print("Updated %s" % u_file_name)
+            return self.__dict__[variable]
+
+    def __get_saved_filename(self, file_name):
+        """If the file name inputted is None then this will return whatever is saved. If nothing is saved then it will
+        throw an error. If the file name inputted is not none it will return what is inputted back."""
+        if file_name is not None:  # They entered a file name so save it
+            return file_name
+        else:  # No file name entered so used the saved file name if it exists
+            if self.file_name_saved is None:
+                raise ValueError("No file name specified to dump the json into!")
+            else:
+                # Use the saved file
+                return self.file_name_saved
