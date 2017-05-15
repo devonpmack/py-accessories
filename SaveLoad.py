@@ -46,12 +46,12 @@ class SaveLoad(object):
             else:
                 raise
 
-    def get(self, variable, file_name=None, default=None):
+    def get(self, variable, file_name=None, default=None, ask=True):
         """Returns the value of the variable specified. If the variable doesn't exist then it will ask the user to input
         this variable. It will then dump the variable to file_name, or the last file_name used."""
         if variable in self.__dict__:
             return self.__dict__[variable]
-        else:
+        elif ask:
             u_file_name = self.__get_saved_filename(file_name)
             if default is None:
                 self.__dict__[variable] = input("%s not in %s, please enter it here:\n" % (variable, u_file_name))
@@ -64,6 +64,11 @@ class SaveLoad(object):
             self.dump()
             print("Updated %s" % u_file_name)
             return self.__dict__[variable]
+        else:
+            if default is not None:
+                self.__dict__[variable] = default
+            else:
+                raise ValueError("Missing variable %s in %s!" % (variable, self.__get_saved_filename(file_name)))
 
     def __get_saved_filename(self, file_name):
         """If the file name inputted is None then this will return whatever is saved. If nothing is saved then it will
