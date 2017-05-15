@@ -31,6 +31,7 @@ class SaveLoad(object):
                 if "Expecting value: " in repr(e) and "line 1 column 1 (char 0)" in repr(e):
                     pass
                 else:
+                    print("Invalid JSON!")
                     raise
             f.close()
             # Successfully loaded file
@@ -45,14 +46,21 @@ class SaveLoad(object):
             else:
                 raise
 
-    def get(self, variable, file_name=None):
+    def get(self, variable, file_name=None, default=None):
         """Returns the value of the variable specified. If the variable doesn't exist then it will ask the user to input
         this variable. It will then dump the variable to file_name, or the last file_name used."""
         if variable in self.__dict__:
             return self.__dict__[variable]
         else:
             u_file_name = self.__get_saved_filename(file_name)
-            self.__dict__[variable] = input("%s not in %s, please enter it here:\n" % (variable, u_file_name))
+            if default is None:
+                self.__dict__[variable] = input("%s not in %s, please enter it here:\n" % (variable, u_file_name))
+            else:
+                self.__dict__[variable] = input("%s not in %s, please enter it here (press enter for default option"
+                                                " \"%s\"):\n" % (variable, u_file_name, default))
+                if self.__dict__[variable] == "":
+                    self.__dict__[variable] = default
+
             self.dump()
             print("Updated %s" % u_file_name)
             return self.__dict__[variable]
