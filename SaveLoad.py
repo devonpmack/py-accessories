@@ -16,7 +16,9 @@ class SaveLoad(object):
         """Dumps this object into file as JSON."""
         # Dump the json
         f = open(self.__get_saved_filename(file_name), "w")
+        file_name_saved = self.__dict__.pop('file_name_saved', None)  # So that it doesn't get saved to file
         json.dump(self.__dict__, f, sort_keys=True, indent=4, separators=(',', ': '))
+        self.file_name_saved = file_name_saved
         f.close()
 
     def load(self, file_name=None, create=False):
