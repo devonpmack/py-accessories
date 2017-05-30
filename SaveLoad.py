@@ -48,9 +48,12 @@ class SaveLoad(object):
             else:
                 raise
 
-    def get(self, variable, file_name=None, default=None, ask=True):
+    def get(self, variable, file_name=None, default=None, ask=True, get_type=None):
         """Returns the value of the variable specified. If the variable doesn't exist then it will ask the user to input
         this variable. It will then dump the variable to file_name, or the last file_name used."""
+        if get_type is not int and get_type is not float and get_type is not str:
+            raise ValueError("get_type must be int, float, or str.")
+
         if variable in self.__dict__:
             pass
         elif ask:
@@ -62,6 +65,17 @@ class SaveLoad(object):
                                                 " \"%s\"):\n" % (variable, u_file_name, default))
                 if self.__dict__[variable] == "":
                     self.__dict__[variable] = default
+            if get_type is not None:
+                before = self.__dict__[variable]
+                if get_type is int:
+                    after = int(before)
+                elif get_type is float:
+                    after = float(before)
+                elif get_type is str:
+                    after = str(before)
+                else:
+                    raise ValueError('This shouldn\'t be running')
+                self.__dict__[variable] = after
 
             self.dump()
             print("Updated %s" % u_file_name)
