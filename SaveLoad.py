@@ -51,7 +51,7 @@ class SaveLoad(object):
     def get(self, variable, file_name=None, default=None, ask=True, get_type=None):
         """Returns the value of the variable specified. If the variable doesn't exist then it will ask the user to input
         this variable. It will then dump the variable to file_name, or the last file_name used."""
-        if get_type is not int and get_type is not float and get_type is not str:
+        if get_type is not int and get_type is not float and get_type is not str and get_type is not None:
             raise ValueError("get_type must be int, float, or str.")
 
         if variable in self.__dict__:
