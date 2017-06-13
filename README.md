@@ -14,7 +14,21 @@ pip install py-accessories-*.tar
 git submodule add https://github.com/devonpmack/pyaccessories.git
 ```
 
-#### SaveLoad
+#### Encrypter.py
+Instantiate the encrypter with `var = Encrypter(path, name)`
+- path: Path where you want to store/load the credential.
+- Name of the credential for asking the user. eg. Api Key
+- key: (optional) 16 characters to use as a key for the encryption (by default will use 'Sixteen byte key').
+
+Then use the `Encrypter.load()` method to attempt to load your encrypted credential from a file. If the file doesn't exist the program will ask for the credential and save it to the file encrypted.
+##### Usage
+```python
+from pyaccessories.Encrypter import Encrypter
+e = Encrypter('pass.txt', 'Api Key')
+print(e.load())
+```
+
+#### SaveLoad.py
 ```python
 from pyaccessories.SaveLoad import SaveLoad
 
@@ -31,7 +45,7 @@ output_file = loader.get('output', default='/home/out.txt')
 open(output_file, 'w').write('Hello World')
 ```
 
-#### TimeLog
+#### TimeLog.py
 ```python
 from pyaccessories.TimeLog import Timer
 
