@@ -59,3 +59,16 @@ t.set_colour(30)
 # Print the message hi
 t.time_print('Hi')
 ```
+
+#### loadingbar.py
+```python
+from loadingbar import LoadingBar
+
+# Create a new instance of LoadingBar with the number of bars (45)
+l = LoadingBar(45)
+
+for i in range(0,10000):
+  # Display the loading bar and update it's percentage
+  l.update(i/10000)
+  
+```
