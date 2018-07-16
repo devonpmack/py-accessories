@@ -75,7 +75,7 @@ LoadingBar.update(new_percent)
 ```python
 from loadingbar import LoadingBar
 
-# Create a new instance of LoadingBar with the number of bars (45)
+# Create a new instance of LoadingBar with a witdth of 45 characters
 l = LoadingBar(45)
 
 for i in range(0,10000):
