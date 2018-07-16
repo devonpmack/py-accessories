@@ -61,16 +61,16 @@ t.time_print('Hi')
 ```
 
 #### LoadingBar.py
-LoadingBar(num_bars)
+LoadingBar(width)
   
-  *Initializes the loading bar*
-- num_bars: length of the loading bar (# of characters) 
+  *Initializes the LoadingBar*
+- width: Width of the LoadingBar (# of characters) 
 
 LoadingBar.update(new_percent)
   
   *Updates the status of the loading bar and draws it to the screen.*
-- new_percent: percentage of the bar that should be filled
-Then use the `Encrypter.load()` method to attempt to load your encrypted credential from a file. If the file doesn't exist the program will ask for the credential and save it to the file encrypted.
+- new_percent: fraction of the loading bar that should be filled (0 to 1)
+
 ##### Usage
 ```python
 from loadingbar import LoadingBar
