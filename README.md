@@ -60,7 +60,7 @@ t.set_colour(30)
 t.time_print('Hi')
 ```
 
-#### loadingbar.py
+#### LoadingBar.py
 ```python
 from loadingbar import LoadingBar
 
