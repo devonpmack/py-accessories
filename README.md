@@ -64,7 +64,7 @@ t.time_print('Hi')
 LoadingBar(num_bars)
   
   *Initializes the loading bar*
-- num_bars: length of the loading bar (number of = signs) 
+- num_bars: length of the loading bar (# of characters) 
 
 LoadingBar.update(new_percent)
   
