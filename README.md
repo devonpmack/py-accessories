@@ -61,6 +61,11 @@ t.time_print('Hi')
 ```
 
 #### LoadingBar.py
+__init__(self, num_bars)
+- num_bars: 
+
+Then use the `Encrypter.load()` method to attempt to load your encrypted credential from a file. If the file doesn't exist the program will ask for the credential and save it to the file encrypted.
+##### Usage
 ```python
 from loadingbar import LoadingBar
 
